@@ -1,0 +1,13 @@
+Set ECHO ON
+; Westminster
+play 16 f# d e Aa pp a E f# dd
+Wait 1
+; Triumphmarsch (Marc Antoine Charpentier)
+play Gg cc c d ee cc Gggg eee e ff g f e f gg d c d e ddpp
+Wait 1
+; Danny Boy
+play efgaaa gadcagfdd
+Wait 1
+; Annie Laurie
+play cc cc c c Ccc c bbaaaa ;aa gg ee ee dc eeeedd
+Set ECHO OFF

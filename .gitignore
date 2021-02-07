@@ -1,4 +1,7 @@
-
+.idea/
+apollo-os/
+tmp*
+test*
 # /
 **/mmakefile
 /config.log

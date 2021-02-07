@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2020, The AROS Development Team. All rights reserved.
     $Id$
 
     Desc: Implements AROS's generic/amiga-like boot sequence.
@@ -23,6 +23,7 @@
 
 #include "dos_intern.h"
 #include "../dosboot/bootflags.h"
+#include "../../../dist_config.h"
 
 extern char *generate_banner(void);
 
@@ -138,8 +139,13 @@ void __dos_Boot(struct DosLibrary *DOSBase, ULONG BootFlags, UBYTE Flags)
         cis = Open("ECON:", MODE_OLDFILE);
     }
 
-    if (cis == BNULL)
+#if defined(__DISTRONAME__)
+	if (cis == BNULL)
+        cis = Open("CON:////" __DISTRONAME__ " (" __DISTROVERSION__ ", " __DISTRODATE__ ")/AUTO/CLOSE/SMART/BOOT", MODE_OLDFILE);
+#else
+	if (cis == BNULL)
         cis = Open("CON:////AROS/AUTO/CLOSE/SMART/BOOT", MODE_OLDFILE);
+#endif
 
     if (cis) {
         BPTR cos = OpenFromLock(DupLockFromFH(cis));

@@ -1,0 +1,69 @@
+#   $Id$
+#
+#   Makefile for shell commands
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES	:= \
+    I2CScan \
+##    SendI2C \
+##   ReceiveI2C
+
+USER_INCLUDES :=
+USER_CFLAGS := -DUSE_EMBEDDED_COMMANDS -DADATE="\"$(shell date "+%d.%m.%Y")\"" -I$(OBJDIR)
+USER_LDFLAGS  := -static
+
+#MM- workbench-c : workbench-c-i2c
+#MM- workbench-c-quick : workbench-c-i2c-quick
+#MM- workbench-c-i2c : includes linklibs workbench-c-i2c-includes
+#MM- workbench-c-i2c-quick : workbench-c-i2c-includes
+
+#MM
+workbench-c-i2c-includes: $(AROS_INCLUDES)/clib/i2c_protos.h $(AROS_INCLUDES)/defines/i2c.h \
+		     $(AROS_INCLUDES)/proto/i2c.h $(AROS_INCLUDES)/libraries/i2c.h
+
+$(AROS_INCLUDES)/clib/i2c_protos.h: $(SRCDIR)/$(CURDIR)/i2c_lib.sfd
+	$(SFDC) --mode=clib --target=x-aros --output=$@ $<
+
+$(AROS_INCLUDES)/defines/i2c.h: $(SRCDIR)/$(CURDIR)/i2c_lib.sfd
+	$(SFDC) --mode=macros --target=x-aros --output=$@ $<
+
+$(AROS_INCLUDES)/proto/i2c.h: $(SRCDIR)/$(CURDIR)/i2c_lib.sfd
+	$(SFDC) --mode=proto --target=x-aros --output=$@ $<
+
+$(AROS_INCLUDES)/libraries/i2c.h: $(SRCDIR)/$(CURDIR)/libraries/i2c.h
+	@$(ECHO) "Copying    $< to $@"
+	@$(CP) $< $@
+
+%build_progs mmake=workbench-c-i2c \
+    files=$(FILES) targetdir=$(AROS_C) \
+    usestartup=yes
+
+# Embedded side of the world
+
+
+USER_CPPFLAGS := \
+               -DUSE_EXEC_DEBUG \
+               -D__NOLIBBASE__ \
+               -DADATE="\"$(shell date "+%d.%m.%Y")\""
+USER_CPPFLAGS += -DUSE_EMBEDDED_COMMANDS
+ifeq ($(AROS_TARGET_CPU),m68k)
+# Make sure we optimize this code for size on m68k..
+OPTIMIZATION_CFLAGS := -Os
+USER_CPPFLAGS   += -D__DOS_NOLIBINLINE__
+endif
+
+OBJDIR := $(OBJDIR).kernel
+
+# These are the built-ins for AmigaOS 3.x and above
+FILES := \
+	 I2CScan
+## SendI2C
+## ReceiveI2C
+## End of list
+
+##%build_module mmake=kernel-i2c \
+##  modname=i2c modtype=resource \
+##  files="i2c_init $(FILES)"
+
+%common

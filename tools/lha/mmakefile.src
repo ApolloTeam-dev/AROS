@@ -1,0 +1,29 @@
+include $(SRCDIR)/config/aros.cfg
+
+#MM- contrib-development : tools-lha
+#MM tools-lha :
+
+# =================================================
+# lha
+# =================================================
+
+GIT_LHA     := https://github.com/jca02266/lha
+CONFIG_LHA  := --prefix=$(HOSTGENDIR)/$(CURDIR)/build --bindir=$(TOOLDIR)
+
+#MM
+tools-lha : $(TOOLDIR)/lha
+
+$(TOOLDIR)/lha : $(HOSTGENDIR)/$(CURDIR)/Makefile
+	$(Q)$(ECHO)"make lha" && $(MAKE) -C $(HOSTGENDIR)/$(CURDIR) all
+	$(Q)$(MKDIR) $(TOOLDIR)
+	$(Q)$(ECHO)"install lha" && $(MAKE) -C $(HOSTGENDIR)/$(CURDIR) install
+
+$(HOSTGENDIR)/$(CURDIR)/Makefile : $(HOSTGENDIR)/$(CURDIR)/configure
+	$(Q)$(MKDIR) $(HOSTGENDIR)/$(CURDIR)
+	$(Q)$(ECHO)"configure lha" && cd $(HOSTGENDIR)/$(CURDIR) && aclocal; autoheader; automake -a; autoconf; $(HOSTGENDIR)/$(CURDIR)/configure $(CONFIG_LHA)
+
+$(HOSTGENDIR)/$(CURDIR)/configure:
+	$(Q)git clone -b master --depth 4 $(GIT_LHA) $(HOSTGENDIR)/$(CURDIR)/
+
+
+%common

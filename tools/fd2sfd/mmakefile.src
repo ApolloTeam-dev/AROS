@@ -1,0 +1,29 @@
+include $(SRCDIR)/config/aros.cfg
+
+#MM- contrib-development : tools-fd2sfd
+#MM tools-fd2sfd :
+
+# =================================================
+# fd2sfd
+# =================================================
+
+GIT_FD2SFD    := https://github.com/cahirwpz/fd2sfd
+CONFIG_FD2SFD := --prefix=$(HOSTGENDIR)/$(CURDIR)/build --bindir=$(TOOLDIR) --target=m68k-amigaos
+
+#MM
+tools-fd2sfd : $(TOOLDIR)/fd2sfd
+
+$(TOOLDIR)/fd2sfd : $(HOSTGENDIR)/$(CURDIR)/build/Makefile
+	$(Q)$(ECHO)"make fd2sfd" && $(MAKE) -C $(HOSTGENDIR)/$(CURDIR)/build all
+	$(Q)$(MKDIR) $(TOOLDIR)
+	$(Q)$(ECHO)"install fd2sfd" && $(MAKE) -C $(HOSTGENDIR)/$(CURDIR)/build install
+
+$(HOSTGENDIR)/$(CURDIR)/build/Makefile : $(HOSTGENDIR)/$(CURDIR)/configure
+	$(Q)$(MKDIR) $(HOSTGENDIR)/$(CURDIR)/build
+	$(Q)$(ECHO)"configure fd2sfd" && cd $(HOSTGENDIR)/$(CURDIR)/build && $(HOSTGENDIR)/$(CURDIR)/configure $(CONFIG_FD2SFD)
+
+$(HOSTGENDIR)/$(CURDIR)/configure:
+	$(Q)git clone -b master --depth 4 $(GIT_FD2SFD) $(HOSTGENDIR)/$(CURDIR)/
+
+
+%common

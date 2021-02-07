@@ -5,6 +5,8 @@
 
 include $(SRCDIR)/config/aros.cfg
 
+USER_CPPFLAGS := -DADATE="\"$(shell date "+%d.%m.%Y")\""
+
 FILES	:= \
     acrypt \
     addamigaguidehost \
@@ -124,7 +126,7 @@ FILES	:= \
     workbenchcontrol
 
 #MM- core-linklibs : linklibs-amiga
-#MM- linklibs: linklibs-amiga 
+#MM- linklibs: linklibs-amiga
 #MM linklibs-amiga : includes includes-copy kernel-aros-includes
 
 %build_linklib mmake=linklibs-amiga libname=amiga files="$(FILES)"

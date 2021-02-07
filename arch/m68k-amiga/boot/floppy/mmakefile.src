@@ -44,6 +44,9 @@ ELF2HUNK_FILES := \
     C/Version \
     C/Wait \
     C/Which \
+	C/I2CScan \
+	C/SendI2C \
+	C/ReceiveI2C \
     Devs/DOSDrivers/PIPE \
     Libs/version.library \
     S/Shell-Startup

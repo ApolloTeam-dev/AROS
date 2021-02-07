@@ -1,0 +1,18 @@
+==id $Id:$
+==base _I2C_Base
+==bias 30
+==public
+*--- functions in v37.0 or higher ---
+BYTE AllocI2C(UBYTE Delay_Type, STRPTR Name) (D0,A1)
+VOID FreeI2C(VOID) ()
+ULONG SetI2CDelay(ULONG ticks) (D0)
+VOID InitI2C(VOID) ()
+ULONG SendI2C(UBYTE addr, UWORD number, UBYTE *i2cdata) (D0,D1,A1)
+ULONG ReceiveI2C(UBYTE addr, UWORD number, UBYTE *i2cdata) (D0,D1,A1)
+*--- functions in v38.0 or higher ---
+STRPTR GetI2COpponent(VOID) ()
+*--- functions in v39.0 or higher ---
+STRPTR I2CErrText(ULONG errnum) (D0)
+VOID ShutDownI2C(VOID) ()
+BYTE BringBackI2C(VOID) ()
+==end

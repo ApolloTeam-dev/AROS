@@ -1,0 +1,54 @@
+
+Here's the source code for the utilities from the "bin" directory,
+plus some sample code for accessing special I²C chips (VPS decoder,
+melody chip and a 4×7 LED display).
+
+These programs were written for the GNU C compiler. They should work
+with others as well, however GNU C is the one with smoothest support
+for installing the i2clib include files (see "Developers" directory).
+
+Regarding the special chips: If you already own such hardware, good
+for you, but there is no documentation on building the hardware, and
+I'm not going to supply any (with one exception, see below).
+
+You can retrieve data sheets for many I2C chips in PDF format from the
+Philips homepage. Try
+
+    http://www-eu.semiconductors.philips.com/products/
+
+In particular, these are the URLs for the chips mentioned above:
+
+    http://www-eu.semiconductors.philips.com/acrobat/datasheets/SAA4700_CNV_2.pdf
+    http://www-eu.semiconductors.philips.com/acrobat/datasheets/PCD3311C_3312C_2.pdf
+    http://www-eu.semiconductors.philips.com/acrobat/datasheets/SAA1064_CNV_2.pdf
+
+In case Philips have rearranged their website in the meantime and
+the above links should fail, try and start at www.philips.com.
+
+
+
+The PCD3312 DTMF/modem/musical-tone generator
+---------------------------------------------
+           __  __
+   GND 1 -|  \/  |- 8 SDA
+   +5V 2 -|      |- 7 SCL
+  OSCI 3 -|      |- 6 A0
+  OSCO 4 -|______|- 5 TONE
+
+OSCI/OSCO: connect a 3.58 MHz quartz here
+A0: connect to GND for slave address 0x48
+     "       " +5V  "   "     "      0x4a
+TONE: DON'T connect a loudspeaker directly, that wouldn't work anyway,
+    rather do something like this:
+
+        100nF
+TONE ----||-----+      Ampl.
+                |
+                #  ____|\      __/|
+        10kOhm  #<-    | >----|  ||
+                #    +-|/   +-|__||
+                |    |      |    \|
+               _|_  _|_    _|_
+
+               GND
+

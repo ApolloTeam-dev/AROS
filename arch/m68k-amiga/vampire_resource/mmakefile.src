@@ -3,7 +3,7 @@
 include $(SRCDIR)/config/aros.cfg
 
 #MM
-kernel-vampire-amiga-m68k: $(KOBJSDIR)/vampire_resource.ko
+kernel-vampire-amiga-m68k: $(KOBJSDIR)/vampire_resource.ko $(KOBJSDIR)/i2c_library.ko
 
 $(KOBJSDIR)/%.ko: $(SRCDIR)/$(CURDIR)/%.ko
 	@$(CP) $< $@

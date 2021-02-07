@@ -3931,10 +3931,16 @@ $(%(mmake)-cmakeflag) : $(%(mmake)-touchfileflag) $(TOP)/$(CURDIR)/mmakefile
 #                         
 #                         The patch_subdir and patch_opt fields are optional.
 
-%define fetch mmake=/A archive_origins=. archive=/A suffixes= location= destination=. \
+%define fetch mmake=/A archive_origins=. archive=/A suffixes= location= destination=. tooldir=$(TOOLDIR) \
     patches_origins=$(SRCDIR)/$(CURDIR) patches_specs=::
 
 .PHONY: %(mmake)
+
+ifneq (%(tooldir),)
+    %(mmake)-tooldir := "%(tooldir)/"
+else
+    %(mmake)-tooldir := "$(TOOLDIR)/"
+endif
 
 ifneq (%(location),)
     %(mmake)-location := %(location)
@@ -3947,7 +3953,7 @@ endif
 #MM
 %(mmake) :
 	$(Q)$(ECHO) "Fetching   %(archive) ..."
-	$(Q)$(FETCH) -ao "%(archive_origins)" -a %(archive) -s "%(suffixes)" -l $(%(mmake)-location) \
+	$(Q)TOOLDIR="$(%(mmake)-tooldir)" $(FETCH) -ao "%(archive_origins)" -a %(archive) -s "%(suffixes)" -l $(%(mmake)-location) \
 	-d %(destination) -po "%(patches_origins)" -p "%(patches_specs)"
 	$(Q)$(IF) ! $(TEST) -f $(%(mmake)-fetchedflag) ; then \
 		 $(TOUCH) $(%(mmake)-fetchedflag) ; \
