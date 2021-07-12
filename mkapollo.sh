@@ -7,10 +7,6 @@ CLEAN=0
 GITCLEAN=0
 DL=0
 WORK="apollo-os"
-DISTRONAME="ApolloOS"
-DISTROVERSION="$(cat version)"
-DISTRODATE="$(date +%Y-%m-%d)"
-AMIGADATE="$(date +"%-d.%-m.%Y")"
 
 if [ -e ".git" ]; then
 	BRANCH="$(git branch --show-current)"
@@ -60,16 +56,7 @@ setvars () {
 	MAKEOPTS="-j${JOBS}"
 	PKGS="git gcc g++ make cmake gawk bison flex bzip2 netpbm autoconf automake libx11-dev libxext-dev libc6-dev liblzo2-dev libxxf86vm-dev libpng-dev libsdl1.2-dev byacc python-mako libxcursor-dev gcc-multilib"
 
-	mkdir -p "${DIR}/${WORK}"
-	VERSION_FILE="${DIR}/${WORK}/dist_config.h"
-
-	printf "#ifndef AROS_DIST_CONFIG_H\n#define AROS_DIST_CONFIG_H\n\n" > "${VERSION_FILE}"
-	# shellcheck disable=SC2129
-	printf "#define __DISTRONAME__\t\t\"%s\"\n" "${DISTRONAME}" >> "${VERSION_FILE}"
-	printf "#define __DISTROVERSION__\t\"%s\"\n" "${DISTROVERSION}" >> "${VERSION_FILE}"
-	printf "#define __DISTRODATE__\t\t\"%s\"\n" "${DISTRODATE}" >> "${VERSION_FILE}"
-	printf "#define __AMIGADATE__\t\t\"%s\"\n" "${AMIGADATE}" >> "${VERSION_FILE}"
-	printf "\n#endif //AROS_DIST_CONFIG_H\n" >> "${VERSION_FILE}"
+	./make_dist_config.sh "${DIR}/${WORK}"
 
 	export CONFOPTS MAKEOPTS SRC PORTS BIN DIR PKGS
 }

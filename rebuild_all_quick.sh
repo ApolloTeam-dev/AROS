@@ -1,4 +1,6 @@
 #!/bin/bash
+./make_dist_config.sh "bin/amiga-m68k/gen"
+
 CPU_COUNT=$(grep processor /proc/cpuinfo | wc -l)
 THREADS=${CPU_COUNT}
 

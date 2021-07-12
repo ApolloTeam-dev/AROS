@@ -62,7 +62,7 @@ static BOOL init_gfx(STRPTR gfxclassname, BOOL bootmode, LIBBASETYPEPTR DOSBootB
     BOOL success = FALSE;
 
     D(bug("[BootMenu] init_gfx('%s')\n", gfxclassname));
-    
+
     GfxBase = (void *)TaggedOpenLibrary(TAGGEDOPEN_GRAPHICS);
     if (GfxBase)
     {
@@ -112,7 +112,7 @@ static LONG rightto(LIBBASETYPEPTR DOSBootBase, LONG width, LONG right)
     return DOSBootBase->bm_Screen->Width - width - right;
 }
 
-static struct Gadget *createGadgetsBoot(LIBBASETYPEPTR DOSBootBase) 
+static struct Gadget *createGadgetsBoot(LIBBASETYPEPTR DOSBootBase)
 {
     LONG cx = centerx((struct DOSBootBase *)DOSBootBase, 280);
 
@@ -179,7 +179,7 @@ static void freeGadgetsUseCancel(LIBBASETYPEPTR DOSBootBase)
     freeButtonGadget(DOSBootBase->bm_MainGadgets.cancel, (struct DOSBootBase *)DOSBootBase);
 }
 
-static struct Gadget *createGadgets(LIBBASETYPEPTR DOSBootBase, WORD page) 
+static struct Gadget *createGadgets(LIBBASETYPEPTR DOSBootBase, WORD page)
 {
     if (page == PAGE_MAIN)
         return createGadgetsBoot(DOSBootBase);
@@ -436,8 +436,6 @@ static void initPageBoot(LIBBASETYPEPTR DOSBootBase)
         }
 
         y += 16;
-        
-        
     }
 }
 
@@ -460,9 +458,9 @@ static void initPage(LIBBASETYPEPTR DOSBootBase, WORD page)
     else if (page == PAGE_BOOT)
         text = "Boot Options";
     else
-        text = "ApolloOS Early Startup Control";
+        text = __DISTRONAME__ " Early Startup Control";
     centertext(DOSBootBase, 2, 10, text);
-    
+
     if (page == PAGE_BOOT)
     {
         /* Set the default */
@@ -480,7 +478,7 @@ static void initPage(LIBBASETYPEPTR DOSBootBase, WORD page)
     if (page == PAGE_MAIN && (GfxBase->DisplayFlags & (NTSC | PAL))) {
             ULONG modeid = GetVPModeID(&DOSBootBase->bm_Screen->ViewPort);
             if (modeid != INVALID_ID && (((modeid & MONITOR_ID_MASK) == NTSC_MONITOR_ID) || ((modeid & MONITOR_ID_MASK) == PAL_MONITOR_ID))) {
-            centertext(DOSBootBase, 1, 30, "(Release 6, 2021-04-08)");
+            centertext(DOSBootBase, 1, 30, "(" __DISTROVERSION__ ", " __DISTRODATE__ ")");
         }
     }
 
@@ -524,7 +522,7 @@ static WORD initWindow(LIBBASETYPEPTR DOSBootBase, struct BootConfig *bcfg, WORD
         CloseWindow(DOSBootBase->bm_Window);
     }
     freeGadgets(DOSBootBase, page);
-    
+
     return newpage;
 }
 
@@ -554,7 +552,7 @@ static BOOL initScreen(LIBBASETYPEPTR DOSBootBase, struct BootConfig *bcfg)
 #define KB_MATRIXSIZE  (KB_MAXKEYS/(sizeof(UBYTE)*8))
 #define ioStd(x) ((struct IOStdReq *)x)
 
-static BOOL buttonsPressed(LIBBASETYPEPTR DOSBootBase) 
+static BOOL buttonsPressed(LIBBASETYPEPTR DOSBootBase)
 {
     BOOL success = FALSE;
     struct MsgPort *mp = NULL;
@@ -607,7 +605,7 @@ static BOOL buttonsPressed(LIBBASETYPEPTR DOSBootBase)
                 }
                 CloseDevice(io);
             }
-            DeleteIORequest(io); 
+            DeleteIORequest(io);
         }
         DeleteMsgPort(mp);
     }
