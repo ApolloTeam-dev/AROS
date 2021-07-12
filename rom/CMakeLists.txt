@@ -1,0 +1,11 @@
+project(aros.rom)
+
+add_subdirectory(kernel)
+add_subdirectory(dos)
+add_subdirectory(debug)
+add_subdirectory(exec)
+add_subdirectory(utility)
+add_subdirectory(intuition)
+add_subdirectory(timer)
+add_subdirectory(graphics)
+add_subdirectory(oop)

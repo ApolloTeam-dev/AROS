@@ -17,7 +17,11 @@
 /.externalToolBuilders
 /autom4te.cache
 /.vscode
-
+.idea
+/apollo-os
+/apollo-v4
+cmake-*/
+CMakeFiles/
 # /arch/.unmaintained/amiga/workbench/hidds/graphics/intuition/
 /arch/.unmaintained/amiga/workbench/hidds/graphics/intuition/*.bak
 /arch/.unmaintained/amiga/workbench/hidds/graphics/intuition/mmakefile
