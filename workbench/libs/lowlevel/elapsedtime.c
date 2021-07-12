@@ -1,9 +1,7 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright (C) 1995-2020, The AROS Development Team. All rights reserved.
 
-    Desc: 
-    Lang: english
+    Desc:
 */
 
 #include <proto/timer.h>
@@ -21,7 +19,7 @@
 
       AROS_LH1(ULONG, ElapsedTime,
 
-/*  SYNOPSIS */ 
+/*  SYNOPSIS */
       AROS_LHA(struct EClockVal *, context, A0),
 
 /*  LOCATION */

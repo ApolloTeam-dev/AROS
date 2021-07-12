@@ -1,9 +1,7 @@
 /*
-    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright (C) 1995-2007, The AROS Development Team. All rights reserved.
 
-    Desc: 
-    Lang: English
+    Desc:
 */
 #include "lowlevel_intern.h"
 
@@ -15,7 +13,7 @@
 
       AROS_LH2(BOOL, SetJoyPortAttrsA,
 
-/*  SYNOPSIS */ 
+/*  SYNOPSIS */
       AROS_LHA(ULONG, portNumber, D0),
       AROS_LHA(struct TagItem *, tagList, A1),
 

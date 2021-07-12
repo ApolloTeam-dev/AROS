@@ -1,9 +1,7 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright (C) 1995-2020, The AROS Development Team. All rights reserved.
 
     Desc: Internal header file for lowlevel library
-    Lang: english
 */
 #ifndef __LOWLEVEL_INTERN_H__
 #define __LOWLEVEL_INTERN_H__
@@ -50,6 +48,7 @@ struct LowLevelBase
 
     /* Input event handling ... */
     struct Library              *ll_InputBase;
+    struct Library              *ll_UtilityBase;
     struct Interrupt        	*ll_InputHandler;
     struct MsgPort          	*ll_InputMP;
     struct IOStdReq         	*ll_InputIO;

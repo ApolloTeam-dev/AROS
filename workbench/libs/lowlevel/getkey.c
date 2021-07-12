@@ -1,9 +1,7 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright (C) 1995-2020, The AROS Development Team. All rights reserved.
 
-    Desc: 
-    Lang: english
+    Desc:
 */
 
 #include "lowlevel_intern.h"
@@ -18,7 +16,7 @@
 
       AROS_LH0(ULONG, GetKey,
 
-/*  SYNOPSIS */ 
+/*  SYNOPSIS */
 
 /*  LOCATION */
       struct LowLevelBase *, LowLevelBase, 8, LowLevel)
@@ -34,14 +32,14 @@
         and qualifier in the high word -:
         
         'qualifier'     key equivalent
-	LLKB_LSHIFT     Left Shift
-	LLKB_RSHIFT     Rigt Shift
-	LLKB_CAPSLOCK   Caps Lock
-	LLKB_CONTROL    Control
-	LLKB_LALT       Left Alt
-	LLKB_RALT       Right Alt
-	LLKB_LAMIGA     Left Amiga
-	LLKB_RAMIGA     Right Amiga
+        LLKB_LSHIFT     Left Shift
+        LLKB_RSHIFT     Rigt Shift
+        LLKB_CAPSLOCK   Caps Lock
+        LLKB_CONTROL    Control
+        LLKB_LALT       Left Alt
+        LLKB_RALT       Right Alt
+        LLKB_LAMIGA     Left Amiga
+        LLKB_RAMIGA     Right Amiga
 
     BUGS
 

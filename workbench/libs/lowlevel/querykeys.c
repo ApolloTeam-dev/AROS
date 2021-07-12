@@ -1,9 +1,7 @@
 /*
-    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright (C) 1995-2007, The AROS Development Team. All rights reserved.
 
-    Desc: 
-    Lang: english
+    Desc:
 */
 #include "lowlevel_intern.h"
 
@@ -17,9 +15,9 @@
 
       AROS_LH2(VOID, QueryKeys,
 
-/*  SYNOPSIS */ 
-      AROS_LHA(struct KeyQuery *, queryArray	, A0),
-      AROS_LHA(UBYTE		, arraySize	, D1),
+/*  SYNOPSIS */
+      AROS_LHA(struct KeyQuery *, queryArray    , A0),
+      AROS_LHA(UBYTE            , arraySize     , D1),
 
 /*  LOCATION */
       struct LowLevelBase *, LowLevelBase, 9, LowLevel)

@@ -1,9 +1,7 @@
 /*
-    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright (C) 1995-2007, The AROS Development Team. All rights reserved.
 
-    Desc: 
-    Lang: english
+    Desc:
 */
 #include "lowlevel_intern.h"
 
@@ -17,7 +15,7 @@
 
       AROS_LH3(VOID, StartTimerInt,
 
-/*  SYNOPSIS */ 
+/*  SYNOPSIS */
       AROS_LHA(APTR , intHandle, A1),
       AROS_LHA(ULONG, timeInterval, D0),
       AROS_LHA(BOOL , continuous, D1),
